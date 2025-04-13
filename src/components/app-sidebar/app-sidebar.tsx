@@ -26,6 +26,8 @@ function AppSidebar({}: Props) {
       const data = await getCardCategories();
       return data as CategoryProps[];
     },
+    staleTime: 12 * 60 * 60 * 1000,
+    gcTime: 24 * 60 * 60 * 1000,
   });
 
   return (

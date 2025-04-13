@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import AppSidebar from "../app-sidebar/app-sidebar";
 import { useTranslations } from "next-intl";
 import Icon from "../../../public/carousell_icon.svg";
+import { useSession } from "next-auth/react"; // If using NextAuth.js
 
 type Props = {};
 
@@ -27,8 +28,6 @@ const iconList = [
 ];
 
 const Header = (props: Props) => {
-  const t = useTranslations("homepage");
-
   return (
     <div className="mx-4 flex items-center justify-between">
       <Link href="/">
