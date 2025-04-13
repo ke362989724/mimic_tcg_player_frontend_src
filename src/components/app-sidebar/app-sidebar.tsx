@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -8,14 +8,25 @@ import {
   SidebarHeader,
   SidebarProvider,
   SidebarTrigger,
-} from "../../components/ui/sidebar";
+} from "../ui/sidebar";
 import { IoIosClose } from "react-icons/io";
+import { getCardCategories } from "@/api-service/card.category";
 import { BiCategoryAlt } from "react-icons/bi";
+import { useQuery } from "@tanstack/react-query";
+import { CategoryProps } from "@/interface/app-sidebar.interface";
 
 type Props = {};
 
 function AppSidebar({}: Props) {
   const [openSidebar, setOpenSidebar] = useState(false);
+
+  const { data, isLoading, isError, refetch, isFetching, error } = useQuery({
+    queryKey: ["cardCategories"],
+    queryFn: async () => {
+      const data = await getCardCategories();
+      return data as CategoryProps[];
+    },
+  });
 
   return (
     <>
@@ -26,9 +37,9 @@ function AppSidebar({}: Props) {
       >
         <div>
           <Sidebar className="">
-            <SidebarHeader>
+            <SidebarHeader className="px-3 py-4 border-b-2">
               <div className="flex justify-between items-center">
-                <div>Every Category</div>
+                <div className="font-title">Every Category</div>
                 <IoIosClose
                   fontSize={24}
                   onClick={() => {
@@ -38,13 +49,24 @@ function AppSidebar({}: Props) {
                 />
               </div>
             </SidebarHeader>
-            <SidebarContent className="p-2">
-              <div>123123</div>
+            <SidebarContent className="">
+              {data &&
+                data.map((el) => {
+                  return (
+                    <div
+                      key={el.id}
+                      className="px-4 py-5 border-b-1 cursor-pointer hover:bg-sidebar-ring"
+                    >
+                      {el.name}
+                    </div>
+                  );
+                })}
             </SidebarContent>
             <SidebarFooter />
           </Sidebar>
         </div>
         <SidebarTrigger
+          className="w-fit p-3 h-full rounded-none cursor-pointer"
           onClick={() => {
             setOpenSidebar(!openSidebar);
           }}

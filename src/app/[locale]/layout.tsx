@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+import QueryProviders from "@/providers/react.query.provider";
 
 export default async function LocaleLayout({
   children,
@@ -22,9 +23,11 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider>
-          <Header />
-          {children}
-          <Footer />
+          <QueryProviders>
+            <Header />
+            {children}
+            <Footer />
+          </QueryProviders>
         </NextIntlClientProvider>
       </body>
     </html>

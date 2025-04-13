@@ -47,8 +47,8 @@ const Header = (props: Props) => {
             </Link>
           );
         })}
-        <Link href="/home">
-          <Button className="cursor-pointer bg-red-500 hover:bg-red-800">
+        <Link href="/sell">
+          <Button className="cursor-pointer bg-red-500 hover:bg-red-800 ml-2">
             Sell
           </Button>
         </Link>

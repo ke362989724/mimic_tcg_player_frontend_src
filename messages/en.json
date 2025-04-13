@@ -1,4 +1,7 @@
 {
+  "header": {
+    "everyCategory": "Every Category"
+  },
   "homepage": {
     "title": "Mimic TCG Player english"
   }
